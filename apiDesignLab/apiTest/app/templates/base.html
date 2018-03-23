@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>API Creation Lab</title>
+		<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+	</head>
+
+	<body>
+
+		<header>
+		</header>
+
+		<div class="button-area">
+			<div>
+				<button class='button'>
+				<a href='get-all-students'>Get All Students</a>
+				</button>
+			</div>
+			<div>
+				<button class='button'>
+				<a href='get-student-by-id'>Get One Student</a>
+				</button>
+			</div>
+			<div>
+				<button class='button'>
+				<a href='get-student-by-id-error'>Test Get One Student Error</a>
+				</button>
+			</div>
+			<div>
+				<button class='button'>
+				<a href='create-new-student'>Create New Student</a>
+				</button>
+			</div>
+			<div>
+				<button class='button'>
+					<a href='create-new-student-error'>Test Create Student Task Error</a>
+					</button>
+			</div>
+		</div>
+
+		</br >
+
+		<h3>Use this search bar to search student by ID</h3>
+
+		<form action="get-student-by-id" method="post">
+			<label class="sm-label" for="id">Search Student by ID</label>
+				<input class="sm-input" type="text" name="id"></input>
+		</form>
+
+	</br >
+
+		<h3>Use this form to create new student</h3>
+
+		<form action="create-new-student" method="post">
+			<label class="sm-label" for="name">Name</label>
+				<input class="sm-input" type="text" name="name"></input>
+			<label class="sm-label" for="description">Description</label>
+				<input class="sm-input" type="text" name="description"></input>
+			<label class="sm-label" for="favorite_class">Favorite Class</label>
+				<input class="sm-input" type="text" name="favorite_class"></input>
+			<input class="action-button" id="submit" type="submit" value="Create Student">
+		</form>
+
+		</br >
+
+		<div id="content">
+			<pre>ID: {{data.id}}</pre>
+			<pre>Name: {{data.name}}</pre>
+			<pre>Description: {{data.description}}</pre>
+			<pre>Favorite Class: {{data.favorite_class}}</pre>
+			<table style="width:100%">
+			<tr>
+				<th>Student ID</th>
+				<th>Student Name</th>
+				<th>Description</th>
+				<th>Favorite Class</th>
+			</tr>
+			 <tr>
+			{% for person in data.students %}
+				<tr>
+				<td>{{ person.id }}</td>
+				<td>{{ person.name }}</td>
+				<td>{{ person.description }}</td>
+				<td>{{ person.favorite_class }}</td>
+			</tr>
+			{% endfor %}
+		</div>
+
+	</body>
+</html>
