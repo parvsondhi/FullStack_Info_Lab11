@@ -32,10 +32,19 @@ def create_student():
     if not request.json or not 'name' in request.json:
         abort(400)
 
+    return_here = {
+        'id': len(students) + 1,
+        'name': request.json['name'],
+        'description': request.json['description'],
+        'favorite_class': request.json['favorite_class']
+    }
+
     # Step 1 - Create a dictionary named return here with id, name, description, and favorite_class
     # fields filled out. Use request.json function to get the data coming from the client request
 
     # Step 2 - Append this to the list students
+
+    return_json = students.append(return_here)
 
     return json.dumps(return_json)
 
