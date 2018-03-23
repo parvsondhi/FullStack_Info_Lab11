@@ -19,6 +19,7 @@ def get_all_students():
 #Requirement 1: Be able to search student by their ID
 @myapp.route('/get-student-by-id', methods=['GET', 'POST'])
 def get_student_by_id(student_id=1):
+    student_id = str(request.form.get("id"))
     pprint('------- GETTING STUDENT -------')
     print(student_id)
     student_id = student_id
@@ -51,7 +52,15 @@ def get_student_by_id_error(student_id=100):
 #Requirement 2: Use the API you created and use the data from the form to create new student
 @myapp.route('/create-new-student', methods=['GET', 'POST'])
 def create_new_student(name='who this guy?', description='u should not be here!', favorite_class='who cares'):
-    pass
+    data = {
+        'id': '',
+        'name': name,
+        'description': description,
+        'favorite_class': favorite_class
+    }
+
+    response = requests.post('http://localhost:5000/class/api/v1/students', json=data)
+    return render_template('base.html', data=json.loads(response.text))
 
 @myapp.route('/create-new-student-error')
 def create_new_student_error():
